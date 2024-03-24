@@ -16,3 +16,6 @@ Run the example using the following command, replacing `ClientID` and `ClientSec
 ```bash
 GenrateVideo.py ClientID ClientSecrate
 ```
+
+## Example output
+Assets/textToVideo.mp4

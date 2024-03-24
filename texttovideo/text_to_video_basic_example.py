@@ -1,27 +1,16 @@
 import requests
-import requests
 import json
-import os
 import sys
-from Payload import texttovideopayload
-
-#Params passed in headers while any call to pictory
-headersPayload="""{"Authorization": "","X-Pictory-User-Id": "PictoryCustomer","Content-Type": "application/json"}"""
-
-#Payload schema for render api
-renderequestPayload="""{
-    "audio": "",
-    "output": "",
-    "scenes": "",
-    "next_generation_video": true,
-    "containsTextToImage": true
-}"""
+from payload import payloads
+from dotenv import load_dotenv
+import os
 
 
 #Genrates token with clientid and client secret
-def gettoken(CLIENT_ID,CLIENT_SECRET):
-
-        url="https://api.pictory.ai/pictoryapis/v1/oauth2/token"
+def get_token(CLIENT_ID,CLIENT_SECRET):
+        BASE_URL=os.getenv('BASE_URL')
+        AUTH_ROUTE=os.getenv('AUTH_ROUTE')
+        url=BASE_URL+AUTH_ROUTE
         payload = json.dumps({
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET
@@ -39,11 +28,13 @@ def gettoken(CLIENT_ID,CLIENT_SECRET):
             return None
              
 #Calls storyboard api with payload present in payload.py and returns jobid as output
-def CreatePreviewStoryboard(token):
-    url="https://api.pictory.ai/pictoryapis/v1/video/storyboard"
-    headers=json.loads(headersPayload)
-    headers['Authorization']=token
-    payloadstoryboard=texttovideopayload
+def create_preview_storyboard(token):
+    BASE_URL=os.getenv('BASE_URL')
+    STORYBOARD_ROUTE=os.getenv('STORYBOARD_ROUTE')
+    url=BASE_URL+STORYBOARD_ROUTE
+    texttovideopayload=payloads.create_storyboard_payload()
+    headers=payloads.set_headers(token,"PictoryCustomer")
+    payloadstoryboard=json.dumps(texttovideopayload)
     print(payloadstoryboard)
     try:
             response = requests.request("POST", url, headers=headers, data=payloadstoryboard)
@@ -57,10 +48,11 @@ def CreatePreviewStoryboard(token):
             return None
 
 #Calls get jobs endpoind to get status of jobid
-def GetJobId(token,jobid):
-    url="https://api.pictory.ai/pictoryapis/v1/jobs/"+jobid
-    headers=json.loads(headersPayload)
-    headers['Authorization']=token
+def get_jobid(token,jobid):
+    BASE_URL=os.getenv('BASE_URL')
+    GET_JOB_ROUTE=os.getenv('GET_JOB_ROUTE')
+    url=BASE_URL+GET_JOB_ROUTE+str(jobid)
+    headers=payloads.set_headers(token,"PictoryCustomer")
     try:
             response = requests.request("GET", url, headers=headers)
             data=response.json()
@@ -70,11 +62,11 @@ def GetJobId(token,jobid):
             return None
     
 #Waits for storyboard job to get complete
-def WaitForStoryboardJobToComplete(token,jobid):
-    response=GetJobId(token,jobid)
+def wait_for_storyboard_job_to_complete(token,jobid):
+    response=get_jobid(token,jobid)
     renderdata={}
     while(str(response).__contains__("in-progress")):
-        response=GetJobId(token,jobid)
+        response=get_jobid(token,jobid)
     renderdata['audio_settings']=response['data']['renderParams']['audio']
     renderdata['output_settings']=response['data']['renderParams']['output']
     renderdata['scenes_settings']=response['data']['renderParams']['scenes']
@@ -82,16 +74,14 @@ def WaitForStoryboardJobToComplete(token,jobid):
     return renderdata
 
 #Calls render endpoint with payload came from storyboard and returns jobid as output
-def CreateVideoRender(token,renderdata):
-    url="https://api.pictory.ai/pictoryapis/v1/video/render"
-    headers=json.loads(headersPayload)
-    headers['Authorization']=token
-    payloadRender=json.loads(renderequestPayload)
-    payloadRender['audio']=renderdata['audio_settings']
-    payloadRender['output']=renderdata['output_settings']
-    payloadRender['scenes']=renderdata['scenes_settings']
-    print(payloadRender)
-    payload=json.dumps(payloadRender)
+def create_video_render(token,renderdata):
+    BASE_URL=os.getenv('BASE_URL')
+    RENDER_ROUTE=os.getenv('RENDER_ROUTE')
+    url=BASE_URL+RENDER_ROUTE
+    renderequestpayload=payloads.create_render_payload(renderdata['audio_settings'],renderdata['output_settings'],renderdata['scenes_settings'])
+    headers=payloads.set_headers(token,"PictoryCustomer")
+    print(renderequestpayload)
+    payload=json.dumps(renderequestpayload)
     print(payload)
     try:
             response = requests.request("POST", url, headers=headers, data=payload)
@@ -105,37 +95,33 @@ def CreateVideoRender(token,renderdata):
             return None
 
 #Waits for render job to get complete
-def WaitForRenderJobToComplete(token,jobid):
-    data=GetJobId(token,jobid)
+def wait_for_render_job_to_complete(token,jobid):
+    data=get_jobid(token,jobid)
     while(str(data).__contains__("in-progress")):
-        data=GetJobId(token,jobid)
+        data=get_jobid(token,jobid)
     print(data)
     url=data['data']['shareVideoURL']
     return url
      
 #Download the final video genrated
-def DownloadVideo(url):
-    destination = 'Text-To-Video/textToVideo.mp4'
+def download_video(url):
+    destination = 'texttovideo/texttovideo.mp4'
     response = requests.get(url, stream=True)
     with open(destination, 'wb') as file:
         for chunk in response.iter_content(chunk_size=128):
             file.write(chunk)
 
 def main():
-    if len(sys.argv) != 3:
-        print("Usage: python GenrateVideo.py <CLIENT_ID> <CLIENT_SECRET>")
-        sys.exit(1)
-
-    CLIENT_ID = sys.argv[1]
-    CLIENT_SECRET = sys.argv[2]
-    
-    token = gettoken(CLIENT_ID, CLIENT_SECRET)
+    load_dotenv()
+    CLIENT_ID = os.getenv('CLIENT_ID')
+    CLIENT_SECRET = os.getenv('CLIENT_SECRET')
+    token = get_token(CLIENT_ID, CLIENT_SECRET)
     print(token)
-    jobid=CreatePreviewStoryboard(token)
-    renderdata=WaitForStoryboardJobToComplete(token,jobid)
-    jobid=CreateVideoRender(token,renderdata)
-    url=WaitForRenderJobToComplete(token,jobid)
-    DownloadVideo(url)
+    jobid=create_preview_storyboard(token)
+    renderdata=wait_for_storyboard_job_to_complete(token,jobid)
+    jobid=create_video_render(token,renderdata)
+    url=wait_for_render_job_to_complete(token,jobid)
+    download_video(url)
 
 
 if __name__ == "__main__":
