@@ -11,13 +11,9 @@ def get_token(CLIENT_ID,CLIENT_SECRET):
         BASE_URL=os.getenv('BASE_URL')
         AUTH_ROUTE=os.getenv('AUTH_ROUTE')
         url=BASE_URL+AUTH_ROUTE
-        payload = json.dumps({
-            "client_id": CLIENT_ID,
-            "client_secret": CLIENT_SECRET
-        })
-        headers = {
-            'Content-Type': 'application/json'
-        }
+        authpaylaod=payloads.create_auth_token_payload(CLIENT_ID,CLIENT_SECRET)
+        payload = json.dumps(authpaylaod)
+        headers=payloads.set_auth_headers()
         try:
             response = requests.request("POST", url, headers=headers, data=payload)
             token=response.json()['access_token']

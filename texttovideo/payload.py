@@ -6,6 +6,14 @@ class payloads:
   TEXT_SCENE_1='Jacobin sympathisers viewed the Directory as a betrayal of the Revolution, while Bonapartists later justified.'
   TEXT_SCENE_2='With Royalists apparently on the verge of power, Republicans attempted a pre-emptive coup on 4 September.'
 
+  def create_auth_token_payload(clientid,clientsecret):
+    payload = {}
+    payload['client_id']=clientid
+    payload['client_secret']=clientsecret
+    return payload
+    
+    
+
   #This function creates audio object used in storyboard payload
   def create_audio_object(aivoiceover):
     audio = {}
@@ -62,6 +70,12 @@ class payloads:
     headers={}
     headers['Authorization']=token
     headers['X-Pictory-User-Id']=userid
+    headers['Content-Type']='application/json'
+    return headers  
+  
+  #This function sets headers for auth request
+  def set_auth_headers():
+    headers={}
     headers['Content-Type']='application/json'
     return headers  
 
