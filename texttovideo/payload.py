@@ -6,6 +6,7 @@ class payloads:
   TEXT_SCENE_1='Jacobin sympathisers viewed the Directory as a betrayal of the Revolution, while Bonapartists later justified.'
   TEXT_SCENE_2='With Royalists apparently on the verge of power, Republicans attempted a pre-emptive coup on 4 September.'
 
+  #This function creates audio object used in storyboard payload
   def create_audio_object(aivoiceover):
     audio = {}
     audio['autoBackgroundMusic']= 'true'
@@ -13,6 +14,7 @@ class payloads:
     audio['aiVoiceOver']=aivoiceover
     return audio
 
+  #This function creates aivoiceover object used in audio object
   def create_aivoiceover_object():
     aivoiceOver = {}
     aivoiceOver['speaker']= 'Jackson'
@@ -20,6 +22,7 @@ class payloads:
     aivoiceOver['amplifyLevel']= 0
     return aivoiceOver
 
+  #This function creates scene object used in scenes array
   def create_scene_object(text):
     scene={}
     scene['text']=text
@@ -32,12 +35,14 @@ class payloads:
     scene['splitTextOnPeriod']= True
     return scene
 
+  #This function creates scenes object used in storyboard payload
   def create_scenes(*argv):
     scenes=[]
     for arg in argv:
       scenes.append(arg)
     return scenes
 
+  #This function creates storyboard payload
   def create_storyboard_payload():
       payload={}
       aivoiceover=payloads.create_aivoiceover_object()
@@ -52,14 +57,15 @@ class payloads:
       payload['scenes']=scenes
       return payload
 
+  #This function sets headers 
   def set_headers(token,userid):
-      headers={}
-      headers['Authorization']=token
-      headers['X-Pictory-User-Id']=userid
-      headers['Content-Type']='application/json'
-      return headers  
+    headers={}
+    headers['Authorization']=token
+    headers['X-Pictory-User-Id']=userid
+    headers['Content-Type']='application/json'
+    return headers  
 
-
+  #This function creates render payload
   def create_render_payload(audio,output,scenes):
       payload={}
       payload['audio']=audio
