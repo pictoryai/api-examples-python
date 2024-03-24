@@ -18,7 +18,6 @@ def get_token(CLIENT_ID,CLIENT_SECRET):
         headers = {
             'Content-Type': 'application/json'
         }
-        print(payload)
         try:
             response = requests.request("POST", url, headers=headers, data=payload)
             token=response.json()['access_token']
@@ -35,13 +34,10 @@ def create_preview_storyboard(token):
     texttovideopayload=payloads.create_storyboard_payload()
     headers=payloads.set_headers(token,"PictoryCustomer")
     payloadstoryboard=json.dumps(texttovideopayload)
-    print(payloadstoryboard)
     try:
             response = requests.request("POST", url, headers=headers, data=payloadstoryboard)
             data=response.json()
-            print(data)
             jobid=data['jobId']
-            print(jobid)
             return jobid
     except requests.exceptions.RequestException as e:
             print(f"Error while storyboard: {e}")
@@ -70,7 +66,6 @@ def wait_for_storyboard_job_to_complete(token,jobid):
     renderdata['audio_settings']=response['data']['renderParams']['audio']
     renderdata['output_settings']=response['data']['renderParams']['output']
     renderdata['scenes_settings']=response['data']['renderParams']['scenes']
-    print(renderdata)
     return renderdata
 
 #Calls render endpoint with payload came from storyboard and returns jobid as output
@@ -80,15 +75,11 @@ def create_video_render(token,renderdata):
     url=BASE_URL+RENDER_ROUTE
     renderequestpayload=payloads.create_render_payload(renderdata['audio_settings'],renderdata['output_settings'],renderdata['scenes_settings'])
     headers=payloads.set_headers(token,"PictoryCustomer")
-    print(renderequestpayload)
     payload=json.dumps(renderequestpayload)
-    print(payload)
     try:
             response = requests.request("POST", url, headers=headers, data=payload)
             data=response.json()
-            print(data)
             jobid=data['data']['job_id']
-            print(jobid)
             return jobid
     except requests.exceptions.RequestException as e:
             print(f"Error while render: {e}")
@@ -99,7 +90,6 @@ def wait_for_render_job_to_complete(token,jobid):
     data=get_jobid(token,jobid)
     while(str(data).__contains__("in-progress")):
         data=get_jobid(token,jobid)
-    print(data)
     url=data['data']['shareVideoURL']
     return url
      
@@ -116,7 +106,6 @@ def main():
     CLIENT_ID = os.getenv('CLIENT_ID')
     CLIENT_SECRET = os.getenv('CLIENT_SECRET')
     token = get_token(CLIENT_ID, CLIENT_SECRET)
-    print(token)
     jobid=create_preview_storyboard(token)
     renderdata=wait_for_storyboard_job_to_complete(token,jobid)
     jobid=create_video_render(token,renderdata)
