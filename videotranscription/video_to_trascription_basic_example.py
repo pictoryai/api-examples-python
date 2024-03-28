@@ -84,44 +84,10 @@ def get_jobid(token,jobid):
     
 #Waits for storyboard job to get complete
 def wait_for_transcription_job_to_complete(token,jobid):
-    response=get_jobid(token,jobid)
-    renderdata={}
+    response=get_jobid(token,jobid)['data']
     while(str(response).__contains__("in-progress")):
-        response=get_jobid(token,jobid)['data']
+        response=get_jobid(token,jobid)
     return response
-
-#Calls render endpoint with payload came from storyboard and returns jobid as output
-def create_video_render(token,renderdata):
-    BASE_URL=os.getenv('BASE_URL')
-    RENDER_ROUTE=os.getenv('RENDER_ROUTE')
-    url=BASE_URL+RENDER_ROUTE
-    renderequestpayload=payloads.create_render_payload(renderdata['audio_settings'],renderdata['output_settings'],renderdata['scenes_settings'])
-    headers=payloads.set_headers(token,"PictoryCustomer")
-    payload=json.dumps(renderequestpayload)
-    try:
-            response = requests.request("POST", url, headers=headers, data=payload)
-            data=response.json()
-            jobid=data['data']['job_id']
-            return jobid
-    except requests.exceptions.RequestException as e:
-            print(f"Error while render: {e}")
-            return None
-
-#Waits for render job to get complete
-def wait_for_render_job_to_complete(token,jobid):
-    data=get_jobid(token,jobid)
-    while(str(data).__contains__("in-progress")):
-        data=get_jobid(token,jobid)
-    url=data['data']['shareVideoURL']
-    return url
-     
-#Download the final video genrated
-def download_video(url):
-    destination = 'texttovideo/texttovideo.mp4'
-    response = requests.get(url, stream=True)
-    with open(destination, 'wb') as file:
-        for chunk in response.iter_content(chunk_size=128):
-            file.write(chunk)
 
 def main():
     load_dotenv()

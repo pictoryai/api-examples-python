@@ -1,12 +1,13 @@
 class payloads:
 
+  #This function creates payload for auth request
   def create_auth_token_payload(clientid,clientsecret):
     payload = {}
     payload['client_id']=clientid
     payload['client_secret']=clientsecret
     return payload
 
-  #This function creates audio object used in storyboard payload
+  #This function creates grenrate url payload
   def create_genrate_url_payload(filename):
     payload = {}
     payload['contentType']= 'video/mp4'
