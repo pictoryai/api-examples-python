@@ -14,7 +14,7 @@ Note: Python must be install
 
 Run the example using the following command, replacing `ClientID` and `ClientSecrate` with your Pictory Clientid and ClientSecrate.
 
-Update CLIENT_ID and CLIENT_SECRET in .env file and run text_to_video_basic_example.py.
+Update CLIENT_ID and CLIENT_SECRET in .env file and run basic_example.py.
 
 To get you CLIENT_ID and CLIENT_SECRET please contact at support@pictory.ai.
 
