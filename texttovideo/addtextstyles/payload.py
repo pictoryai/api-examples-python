@@ -15,32 +15,32 @@ class payloads:
     
 
   #This function creates audio object used in storyboard payload
-  def create_audio_object(aivoiceover):
+  def create_audio_object(aivoiceover,auto_background_music ='true',background_music_volume = 0.5):
     audio = {}
-    audio['autoBackgroundMusic']= 'true'
-    audio['backGroundMusicVolume']= 0.5
+    audio['autoBackgroundMusic']= auto_background_music
+    audio['backGroundMusicVolume']= background_music_volume
     audio['aiVoiceOver']=aivoiceover
     return audio
 
   #This function creates aivoiceover object used in audio object
-  def create_aivoiceover_object():
+  def create_aivoiceover_object(speaker='Jackson',speed=100,amplify_level=0):
     aivoiceOver = {}
-    aivoiceOver['speaker']= 'Jackson'
-    aivoiceOver['speed']= 100
-    aivoiceOver['amplifyLevel']= 0
+    aivoiceOver['speaker']= speaker
+    aivoiceOver['speed']= speed
+    aivoiceOver['amplifyLevel']= amplify_level
     return aivoiceOver
 
   #This function creates scene object used in scenes array
-  def create_scene_object(text):
+  def create_scene_object(text,font_family='Roboto',text_color='#00FF00',fontsize=32,text_background_color='#000000',voice_over=True,split_text_on_new_line=False,split_text_on_period=True):
     scene={}
     scene['text']=text
-    scene['fontFamily']= 'Roboto'
-    scene['textColor']= '#00FF00'
-    scene['fontSize']= 32
-    scene['textBackgroundColor']= '#000000'
-    scene['voiceOver']= True
-    scene['splitTextOnNewLine']= False
-    scene['splitTextOnPeriod']= True
+    scene['fontFamily']= font_family
+    scene['textColor']= text_color
+    scene['fontSize']= fontsize
+    scene['textBackgroundColor']= text_background_color
+    scene['voiceOver']= voice_over
+    scene['splitTextOnNewLine']= split_text_on_new_line
+    scene['splitTextOnPeriod']= split_text_on_period
     return scene
 
   #This function creates scenes object used in storyboard payload
@@ -50,6 +50,18 @@ class payloads:
       scenes.append(arg)
     return scenes
 
+  #This function creates object of brand logo used in storyboard payload
+  def create_text_styles_object(text_color='#FFFF00',font_family='Roboto',text_background_color='#FFFF00',font_name='Serif',font_size=20,vertical_alignment='top',horizontal_alignment='center'):
+    text_style={}
+    text_style['textColor']=text_color
+    text_style['textBackgroundColor']=text_background_color
+    text_style['fontFamily']= font_family
+    text_style['fontName']=font_name
+    text_style['fontSize']=font_size
+    text_style['verticalAlignment']=vertical_alignment
+    text_style['horizontalAlignment']=horizontal_alignment
+    return text_style
+
   #This function creates storyboard payload
   def create_storyboard_payload():
       payload={}
@@ -58,10 +70,12 @@ class payloads:
       scene1=payloads.create_scene_object(TEXT_SCENE_1)
       scene2=payloads.create_scene_object(TEXT_SCENE_2)
       scenes=payloads.create_scenes(scene1,scene2)
+      text_style=payloads.create_text_styles_object()
       payload['videoName']='Text_To_Video_English'
       payload['videoDescription']='Text_To_Video_English'
       payload['language']='en'
       payload['audio']=audio
+      payload['textStyles']=text_style
       payload['scenes']=scenes
       return payload
 
