@@ -25,8 +25,9 @@ def get_token(CLIENT_ID,CLIENT_SECRET):
 def generate_upload_url(token):
     BASE_URL=os.getenv('BASE_URL')
     GENERATEURL_ROUTE=os.getenv('GENERATEURL_ROUTE')
+    USER_ID = os.getenv('USER_ID')
     url=BASE_URL+GENERATEURL_ROUTE
-    headers=payloads.set_headers(token,"PictoryCustomer")
+    headers=payloads.set_headers(token,USER_ID)
     generateurl_payload=payloads.create_genrate_url_payload("testvideo.mp4")
     payload=json.dumps(generateurl_payload)
     try:
@@ -55,9 +56,10 @@ def create_trascription(token,fileurl,language):
     BASE_URL=os.getenv('BASE_URL')
     TRANSCRIPTION_ROUTE=os.getenv('TRANSCRIPTION_ROUTE')
     WEBHOOK_URL=os.getenv('WEBHOOK_URL')
+    USER_ID = os.getenv('USER_ID')
     url=BASE_URL+TRANSCRIPTION_ROUTE
     transcriptionpayload=payloads.create_transcription_payload(fileurl,language,WEBHOOK_URL)
-    headers=payloads.set_headers(token,"PictoryCustomer")
+    headers=payloads.set_headers(token,USER_ID)
     payload=json.dumps(transcriptionpayload)
     try:
             response = requests.request("POST", url, headers=headers, data=payload)
@@ -72,8 +74,9 @@ def create_trascription(token,fileurl,language):
 def get_jobid(token,jobid):
     BASE_URL=os.getenv('BASE_URL')
     GET_JOB_ROUTE=os.getenv('GET_JOB_ROUTE')
+    USER_ID = os.getenv('USER_ID')
     url=BASE_URL+GET_JOB_ROUTE+str(jobid)
-    headers=payloads.set_headers(token,"PictoryCustomer")
+    headers=payloads.set_headers(token,USER_ID)
     try:
             response = requests.request("GET", url, headers=headers)
             data=response.json()

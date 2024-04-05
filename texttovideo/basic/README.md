@@ -1,4 +1,4 @@
-# Create transcription from video
+# Create video from text
 
 This example shows how to create video from text
 
@@ -14,7 +14,7 @@ Note: Python must be install
 
 Run the example using the following command, replacing `USER_ID` `CLIENT_ID` and `CLIENT_SECRET` with your Pictory UserId, Clientid and ClientSecrate.
 
-Update USER_ID,CLIENT_ID and CLIENT_SECRET in .env file and run tvideo_to_trascription_basic_example.py.
+Update USER_ID,CLIENT_ID and CLIENT_SECRET in .env file and run basic_example.py.
 
 To get your USER_ID, CLIENT_ID and CLIENT_SECRET please contact at support@pictory.ai.
 
