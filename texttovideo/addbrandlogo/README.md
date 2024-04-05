@@ -12,9 +12,9 @@ Note: Python must be install
 
 ---
 
-Run the example using the following command, replacing `ClientID` and `ClientSecrate` with your Pictory Clientid and ClientSecrate.
+Run the example using the following command, replacing `USER_ID` `CLIENT_ID` and `CLIENT_SECRET` with your Pictory UserId, Clientid and ClientSecrate.
 
-Update CLIENT_ID and CLIENT_SECRET in .env file and run add_brand_logo_example.pye.py.
+Update USER_ID,CLIENT_ID and CLIENT_SECRET in .env file and run add_brand_logo_example.pye.py.
 
-To get you CLIENT_ID and CLIENT_SECRET please contact at support@pictory.ai.
+To get your USER_ID, CLIENT_ID and CLIENT_SECRET please contact at support@pictory.ai.
 

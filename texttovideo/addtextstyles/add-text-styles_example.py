@@ -26,9 +26,10 @@ def get_token(CLIENT_ID,CLIENT_SECRET):
 def create_preview_storyboard(token):
     BASE_URL=os.getenv('BASE_URL')
     STORYBOARD_ROUTE=os.getenv('STORYBOARD_ROUTE')
+    USER_ID = os.getenv('USER_ID')
     url=BASE_URL+STORYBOARD_ROUTE
     texttovideopayload=payloads.create_storyboard_payload()
-    headers=payloads.set_headers(token,"PictoryCustomer")
+    headers=payloads.set_headers(token,USER_ID)
     payloadstoryboard=json.dumps(texttovideopayload)
     try:
             response = requests.request("POST", url, headers=headers, data=payloadstoryboard)
@@ -43,8 +44,9 @@ def create_preview_storyboard(token):
 def get_jobid(token,jobid):
     BASE_URL=os.getenv('BASE_URL')
     GET_JOB_ROUTE=os.getenv('GET_JOB_ROUTE')
+    USER_ID = os.getenv('USER_ID')
     url=BASE_URL+GET_JOB_ROUTE+str(jobid)
-    headers=payloads.set_headers(token,"PictoryCustomer")
+    headers=payloads.set_headers(token,USER_ID)
     try:
             response = requests.request("GET", url, headers=headers)
             data=response.json()
@@ -68,9 +70,10 @@ def wait_for_storyboard_job_to_complete(token,jobid):
 def create_video_render(token,renderdata):
     BASE_URL=os.getenv('BASE_URL')
     RENDER_ROUTE=os.getenv('RENDER_ROUTE')
+    USER_ID = os.getenv('USER_ID')
     url=BASE_URL+RENDER_ROUTE
     renderequestpayload=payloads.create_render_payload(renderdata['audio_settings'],renderdata['output_settings'],renderdata['scenes_settings'])
-    headers=payloads.set_headers(token,"PictoryCustomer")
+    headers=payloads.set_headers(token,USER_ID)
     payload=json.dumps(renderequestpayload)
     try:
             response = requests.request("POST", url, headers=headers, data=payload)
