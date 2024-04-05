@@ -2,10 +2,9 @@ class payloads:
 
   global ARTICAL_URL_1
   global ARTICAL_URL_2
-
-  ARTICAL_URL_1="https://digitalmarketinginstitute.com/blog/grow-your-email-marketing-database-in-a-day-the-loveable-inbound-way"
-  ARTICAL_URL_2="https://blog.google/technology/ai/google-gemini-ai/#sundar-note"
-
+  global ARTICAL_URL
+  ARTICAL_URL=["https://digitalmarketinginstitute.com/blog/grow-your-email-marketing-database-in-a-day-the-loveable-inbound-way","https://blog.google/technology/ai/google-gemini-ai/#sundar-note"]
+ 
   def create_auth_token_payload(clientid,clientsecret):
     payload = {}
     payload['client_id']=clientid
@@ -44,10 +43,11 @@ class payloads:
     return scene
 
   #This function creates scenes object used in storyboard payload
-  def create_scenes(*argv):
+  def create_scenes(article_url):
     scenes=[]
-    for arg in argv:
-      scenes.append(arg)
+    for url in article_url:
+      scene=payloads.create_scene_object(url)
+      scenes.append(scene)
     return scenes
 
   #This function creates storyboard payload
@@ -55,9 +55,7 @@ class payloads:
       payload={}
       aivoiceover=payloads.create_aivoiceover_object()
       audio=payloads.create_audio_object(aivoiceover)
-      scene1=payloads.create_scene_object(ARTICAL_URL_1)
-      scene2=payloads.create_scene_object(ARTICAL_URL_2)
-      scenes=payloads.create_scenes(scene1,scene2)
+      scenes=payloads.create_scenes(ARTICAL_URL)
       payload['videoName']='Text_To_Video_English'
       payload['videoDescription']='Text_To_Video_English'
       payload['language']='en'

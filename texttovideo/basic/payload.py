@@ -1,10 +1,8 @@
 class payloads:
 
-  global TEXT_SCENE_1
-  global TEXT_SCENE_2
+  global TEXT_SCENES
 
-  TEXT_SCENE_1='Jacobin sympathisers viewed the Directory as a betrayal of the Revolution, while Bonapartists later justified.'
-  TEXT_SCENE_2='With Royalists apparently on the verge of power, Republicans attempted a pre-emptive coup on 4 September.'
+  TEXT_SCENES=['Jacobin sympathisers viewed the Directory as a betrayal of the Revolution, while Bonapartists later justified.','With Royalists apparently on the verge of power, Republicans attempted a pre-emptive coup on 4 September.']
 
   def create_auth_token_payload(clientid,clientsecret):
     payload = {}
@@ -44,10 +42,11 @@ class payloads:
     return scene
 
   #This function creates scenes object used in storyboard payload
-  def create_scenes(*argv):
+  def create_scenes(text_list):
     scenes=[]
-    for arg in argv:
-      scenes.append(arg)
+    for text in text_list:
+      scene=payloads.create_scene_object(text)
+      scenes.append(scene)
     return scenes
 
   #This function creates storyboard payload
@@ -55,9 +54,7 @@ class payloads:
       payload={}
       aivoiceover=payloads.create_aivoiceover_object()
       audio=payloads.create_audio_object(aivoiceover)
-      scene1=payloads.create_scene_object(TEXT_SCENE_1)
-      scene2=payloads.create_scene_object(TEXT_SCENE_2)
-      scenes=payloads.create_scenes(scene1,scene2)
+      scenes=payloads.create_scenes(TEXT_SCENES)
       payload['videoName']='Text_To_Video_English'
       payload['videoDescription']='Text_To_Video_English'
       payload['language']='en'
