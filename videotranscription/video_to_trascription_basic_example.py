@@ -89,7 +89,7 @@ def get_jobid(token,jobid):
 def wait_for_transcription_job_to_complete(token,jobid):
     response=get_jobid(token,jobid)['data']
     while(str(response).__contains__("in-progress")):
-        response=get_jobid(token,jobid)
+        response=get_jobid(token,jobid)['data']
     return response
 
 def main():
