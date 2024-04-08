@@ -40,22 +40,13 @@ class payloads:
   
 
   #This function creates audio object used in storyboard payload
-  def create_audio_object(aivoiceover,voice_over_uri,auto_background_music ='true',background_music_volume = 0.5):
+  def create_audio_object(voice_over_uri,auto_background_music ='true',background_music_volume = 0.5):
     audio = {}
     audio['autoBackgroundMusic']= auto_background_music
     audio['backGroundMusicVolume']= background_music_volume
-    # audio['aiVoiceOver']=aivoiceover
     audio['voiceOverUri']=voice_over_uri
     audio['autoSyncVoiceOver']=True
     return audio
-
-  #This function creates aivoiceover object used in audio object
-  def create_aivoiceover_object(speaker='Jackson',speed=100,amplify_level=0):
-    aivoiceOver = {}
-    aivoiceOver['speaker']= speaker
-    aivoiceOver['speed']= speed
-    aivoiceOver['amplifyLevel']= amplify_level
-    return aivoiceOver
 
   #This function creates scene object used in scenes array
   def create_scene_object(text,font_family='Roboto',text_color='#00FF00',fontsize=32,text_background_color='#000000',voice_over=True,split_text_on_new_line=False,split_text_on_period=True):
@@ -84,8 +75,7 @@ class payloads:
   #This function creates storyboard payload
   def create_storyboard_payload(text,voice_over_uri):
       payload={}
-      aivoiceover=payloads.create_aivoiceover_object()
-      audio=payloads.create_audio_object(aivoiceover,voice_over_uri)
+      audio=payloads.create_audio_object(voice_over_uri)
       scenes=payloads.create_scenes(text)
       payload['videoName']='audio_to_video'
       payload['videoDescription']='audio_to_video'
