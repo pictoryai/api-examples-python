@@ -93,12 +93,12 @@ def wait_for_transcription_job_to_complete(token,jobid):
     return response
 
 #Calls storyboard api with payload present in payload.py and returns jobid as output
-def create_preview_storyboard(token,text):
+def create_preview_storyboard(token,text,voice_over_uri):
     BASE_URL=os.getenv('BASE_URL')
     STORYBOARD_ROUTE=os.getenv('STORYBOARD_ROUTE')
     USER_ID = os.getenv('USER_ID')
     url=BASE_URL+STORYBOARD_ROUTE
-    texttovideopayload=payloads.create_storyboard_payload(text)
+    texttovideopayload=payloads.create_storyboard_payload(text,voice_over_uri)
     headers=payloads.set_headers(token,USER_ID)
     payloadstoryboard=json.dumps(texttovideopayload)
     try:
@@ -182,7 +182,8 @@ def main():
     jobid=create_trascription(token,data['url'],'en-US')
     transcriptiondata=wait_for_transcription_job_to_complete(token,jobid)
     text=transcriptiondata['txt']
-    jobid=create_preview_storyboard(token,text)
+    voice_over_uri=data['url']
+    jobid=create_preview_storyboard(token,text,voice_over_uri)
     renderdata=wait_for_storyboard_job_to_complete(token,jobid)
     jobid=create_video_render(token,renderdata)
     url=wait_for_render_job_to_complete(token,jobid)

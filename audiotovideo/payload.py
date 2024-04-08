@@ -40,11 +40,13 @@ class payloads:
   
 
   #This function creates audio object used in storyboard payload
-  def create_audio_object(aivoiceover,auto_background_music ='true',background_music_volume = 0.5):
+  def create_audio_object(aivoiceover,voice_over_uri,auto_background_music ='true',background_music_volume = 0.5):
     audio = {}
     audio['autoBackgroundMusic']= auto_background_music
     audio['backGroundMusicVolume']= background_music_volume
-    audio['aiVoiceOver']=aivoiceover
+    # audio['aiVoiceOver']=aivoiceover
+    audio['voiceOverUri']=voice_over_uri
+    audio['autoSyncVoiceOver']=True
     return audio
 
   #This function creates aivoiceover object used in audio object
@@ -80,10 +82,10 @@ class payloads:
     return scenes
 
   #This function creates storyboard payload
-  def create_storyboard_payload(text):
+  def create_storyboard_payload(text,voice_over_uri):
       payload={}
       aivoiceover=payloads.create_aivoiceover_object()
-      audio=payloads.create_audio_object(aivoiceover)
+      audio=payloads.create_audio_object(aivoiceover,voice_over_uri)
       scenes=payloads.create_scenes(text)
       payload['videoName']='audio_to_video'
       payload['videoDescription']='audio_to_video'
