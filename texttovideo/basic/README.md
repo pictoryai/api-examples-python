@@ -28,9 +28,9 @@ Note: If you don't have your CLIENT_ID, CLIENT_SECRET and X-Pictory-User-Id plea
 ```json
 Sample Storyboard API
 {
-    "videoName": "Sino-Japanese-War", //Desired video file name
-    "videoDescription": "Santa Claus is coming to town", //*optional*
-    "language": "en", //Text language: English only
+    "videoName": "Sino-Japanese-War", 
+    "videoDescription": "History about First China Japan War ", 
+    "language": "en", 
     "webhook": "https://webhook.site/f817c508-0cce-486c-a74d-4537759b077f",
     "brandLogo": {
     "url":"https://pictory.ai/wp-content/uploads/2022/03/logo-new-fon-2t.png", 
