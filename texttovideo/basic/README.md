@@ -25,8 +25,8 @@ Note: If you don't have your CLIENT_ID, CLIENT_SECRET and X-Pictory-User-Id plea
      
      f. **Download**: Once rendering is complete, download the final video.
 
+###Sample Storyboard API
 ```json
-Sample Storyboard API
 {
     "videoName": "Sino-Japanese-War", 
     "videoDescription": "History about First China Japan War ", 
