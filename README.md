@@ -19,4 +19,4 @@ Note: If you don't have your CLIENT_ID, CLIENT_SECRET and X-Pictory-User-Id plea
 
 # Text to Video Examples
 
-1. ![Convert Text to Video](https://github.com/pictoryai/api-examples-python/tree/docs-readme-md/texttovideo/basic) 
+1. [Convert Text to Video](https://github.com/pictoryai/api-examples-python/tree/docs-readme-md/texttovideo/basic) 
