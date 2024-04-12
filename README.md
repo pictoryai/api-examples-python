@@ -7,7 +7,7 @@ These APIs allow for the creation and editing of videos based on various text in
 1. Generating new videos directly from existing text content.
 2. Converting your published blogs or articles into videos using their URLs.
 
-## Requirements
+## Prerequisites
 Ensure you have the following prerequisites installed:
 
 1. Python 3.x
