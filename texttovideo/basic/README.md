@@ -25,7 +25,7 @@ Note: If you don't have your CLIENT_ID, CLIENT_SECRET and X-Pictory-User-Id plea
      
      f. **Download**: Once rendering is complete, download the final video.
 
-###Sample Storyboard API
+### Sample Storyboard API
 ```json
 {
     "videoName": "Sino-Japanese-War", 
@@ -56,18 +56,74 @@ Note: If you don't have your CLIENT_ID, CLIENT_SECRET and X-Pictory-User-Id plea
     },
     "scenes": [
         {
-            "backgroundUri": "https://dm0qx8t0i9gc9.cloudfront.net/watermarks/video/HVzxMQxkil73u47k1/videoblocks-retro-soldiers-troops53_hshdoehnt__6dfbfe0529e764e8f04bdf8e76ed41b3__P480.mp4?type=preview&origin=VIDEOBLOCKS&timestamp_ms=1712305921133&publicKey=NFKFzias7JkF35W3n9edUuQV1Rnn7udTDco3ZbvzlsXgiAzLXO0a15shkgbMNmXZ&organizationId=103776&apiVersion=2.0&stockItemId=348672814&resolution=480p&endUserId=718890439cf9899e412f4e3d6c8148c452fb5959&projectId=dev&searchId=9903f512-732f-4f3c-b474-bc0445fac778&searchPageId=55ea31e8-24a8-46d4-bf50-ee37a3926aae",
-            "backgroundType": "video",
-            "assetId": "1495121538",
-            "library": "getty",
-            "minSceneDuration":"6"
-        }, 
-        {
             "text": "The First Sino-Japanese War (25 July 1894 – 17 April 1895) or the First China–Japan War was a conflict between the Qing dynasty and Empire of Japan primarily over influence in Korea.",
             "voiceOver": true,
             "splitTextOnNewLine": false, 
             "splitTextOnPeriod": true 
+        }
+        {
+            "text": "After more than six months of unbroken successes by Japanese land and naval forces and the loss of the port of Weihaiwei, the Qing government sued for peace in February 1895.",
+            "voiceOver": true, 
+            "textBackgroundColor": "#000000",
+            "splitTextOnNewLine": false, 
+            "splitTextOnPeriod": true,  
+            "horizontalAlignment": "right"
         },
+        {
+            "text": "The war demonstrated the failure of the Qing dynasty's attempts to modernize its military and fend off threats to its sovereignty, especially when compared with Japan's successful Meiji Restoration.",
+            "voiceOver": true, 
+            "textColor": "#FFFFFF",
+            "textBackgroundColor": "#000000",
+            "splitTextOnNewLine": false, 
+            "splitTextOnPeriod": true, 
+            "fontStyle": "italic", //normal, italic"
+            "horizontalAlignment": "right",
+            "verticalAlignment": "top"
+        },
+        {
+            "text": "For the first time, regional dominance in East Asia shifted from China to Japan;",
+            "voiceOver": true, //AI voice reads the text
+            "textDecoration": "underline",
+            "splitTextOnNewLine": false, 
+            "splitTextOnPeriod": true, 
+            "horizontalAlignment": "center",
+            "verticalAlignment": "bottom"
+        },
+                {
+            "text": "the prestige of the Qing dynasty, along with the classical tradition in China, suffered a major blow.",
+            "voiceOver": true, //AI voice reads the text
+            "textDecoration": "underline",
+            "splitTextOnNewLine": false, 
+            "splitTextOnPeriod": true, 
+            "horizontalAlignment": "center",
+            "verticalAlignment": "bottom"
+        },
+        {
+            "text": "The humiliating loss of Korea as a tributary state sparked an unprecedented public outcry.",
+            "voiceOver": true, //AI voice reads the text
+            "keywordColor": "#000000",
+            "fontStyle": "italic",
+            "splitTextOnNewLine": false, 
+            "splitTextOnPeriod": true 
+        },
+        {
+            "text": "Within China, the defeat was a catalyst for a series of political upheavals led by Sun Yat-sen and Kang Youwei, culminating in the 1911 Revolution and ultimate end of dynastic rule in China.",
+            "voiceOver": true, //AI voice reads the text
+            "keywordColor": "#000000",
+            "textDecoration": "underline",
+            "splitTextOnNewLine": false, 
+            "splitTextOnPeriod": true 
+        },
+        {
+            "text": "Thank You for watching. This video demonstrated the Pictory API's capability to add the Brand Logo and apply Text Styles",
+            "voiceOver": true,
+            "fontSize": 32,
+            "fontWeight": "bold",
+            "splitTextOnNewLine": false, 
+            "splitTextOnPeriod": true,
+            "horizontalAlignment": "center",
+            "verticalAlignment": "center"
+        }
     ],
     "voiceOver": true, //AI voice reads the text
     "splitTextOnNewLine": false, //Split scenes on '\n' in text
