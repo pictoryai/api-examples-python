@@ -19,4 +19,12 @@ Note: If you don't have your CLIENT_ID, CLIENT_SECRET and X-Pictory-User-Id plea
 
 # Text to Video Examples
 
-1. [Convert Text to Video](https://github.com/pictoryai/api-examples-python/tree/docs-readme-md/texttovideo/basic) 
+1. [Convert Text to Video using Storyboard API](https://github.com/pictoryai/api-examples-python/tree/docs-readme-md/texttovideo/basic) 
+2. [Add Brand Logo to your Videos](https://github.com/pictoryai/api-examples-python/tree/docs-readme-md/texttovideo/addbrandlogo) 
+3. [Add Text Styles to your Videos](https://github.com/pictoryai/api-examples-python/tree/docs-readme-md/texttovideo/addtextstyles)
+4. [Add Intro / Outro scenes to your Videos](https://github.com/pictoryai/api-examples-python/tree/docs-readme-md/texttovideo/introoutro)
+
+
+# Video Summary and Transcription Examples
+1. [Summarize your existing Video](https://github.com/pictoryai/api-examples-python/tree/docs-readme-md/videohighlights)
+2. [Burn Subtitles to your existing Video](https://github.com/pictoryai/api-examples-python/tree/docs-readme-md/videotranscription)
