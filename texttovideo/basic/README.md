@@ -14,10 +14,15 @@ Note: If you don't have your CLIENT_ID, CLIENT_SECRET and X-Pictory-User-Id plea
  2. Run the script text_to_video.py to initiate the text-to-video conversion process. This will perform the following steps:
 
      a. **Authentication**: Generate an access token using the provided client ID and client secret.
+
      b. **Storyboard Creation**: Call the storyboard API with predefined payloads to create a storyboard. Returns a job ID.
+     
      c. **Waiting for Storyboard Job**: Monitor the status of the storyboard job until it completes.
+     
      d. **Video Rendering**: Call the render endpoint with data obtained from the completed storyboard job. Returns a job ID for rendering.
+     
      e. **Waiting for Render Job**: Monitor the status of the rendering job until it completes.
+     
      f. **Download**: Once rendering is complete, download the final video.
 
 ```json
