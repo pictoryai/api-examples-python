@@ -1,4 +1,4 @@
-# Requirements
+# Prerequisites
 Ensure you have the following prerequisites installed:
 
 1. Python 3.x
@@ -7,6 +7,8 @@ Ensure you have the following prerequisites installed:
 
 Note: If you don't have your CLIENT_ID, CLIENT_SECRET and X-Pictory-User-Id please contact us at *support@pictory.ai*.
 
+# How to run
+python text_to_video.py
 
 # Usage
  1. Update USER_ID,CLIENT_ID and CLIENT_SECRET in .env file.
@@ -134,9 +136,6 @@ Note: If you don't have your CLIENT_ID, CLIENT_SECRET and X-Pictory-User-Id plea
 
 # Customization
 You can customize the video output settings and audio settings by modifying the payload functions in payloads.py. Adjust the parameters according to your preferences.
-
-# Example
-python text_to_video.py
 
 # Output
 The final video will be saved as texttovideo/texttovideo.mp4 in the project directory.
