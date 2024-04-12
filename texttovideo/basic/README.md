@@ -8,7 +8,7 @@ Ensure you have the following prerequisites installed:
 Note: If you don't have your CLIENT_ID, CLIENT_SECRET and X-Pictory-User-Id please contact us at *support@pictory.ai*.
 
 # How to run
-python text_to_video.py
+```python text_to_video.py```
 
 # Usage
  1. Update USER_ID,CLIENT_ID and CLIENT_SECRET in .env file.
