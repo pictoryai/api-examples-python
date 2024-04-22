@@ -33,13 +33,13 @@ def main():
     load_dotenv()
     CLIENT_ID = os.getenv('CLIENT_ID')
     CLIENT_SECRET = os.getenv('CLIENT_SECRET')
-    obj=basic()
-    token = obj.get_token(CLIENT_ID, CLIENT_SECRET)
+    basic_obj=basic()
+    token = basic_obj.get_token(CLIENT_ID, CLIENT_SECRET)
     jobid=create_preview_storyboard(token)
-    render_data=obj.wait_for_storyboard_job_to_complete(token,jobid)
-    jobid=obj.create_video_render(token,render_data)
-    url=obj.wait_for_render_job_to_complete(token,jobid)
-    obj.download_video(url,"add_brand_logo.mp4")
+    render_data=basic_obj.wait_for_storyboard_job_to_complete(token,jobid)
+    jobid=basic_obj.create_video_render(token,render_data)
+    url=basic_obj.wait_for_render_job_to_complete(token,jobid)
+    basic_obj.download_video(url,"add_brand_logo.mp4")
 
 
 if __name__ == "__main__":
