@@ -39,7 +39,7 @@ def main():
     render_data=basic_obj.wait_for_storyboard_job_to_complete(token,jobid)
     jobid=basic_obj.create_video_render(token,render_data)
     url=basic_obj.wait_for_render_job_to_complete(token,jobid)
-    basic_obj.download_video(url,"add_brand_logo.mp4")
+    basic_obj.download_video(url,"visual_to_video.mp4")
 
 
 if __name__ == "__main__":
