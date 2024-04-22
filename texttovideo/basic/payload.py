@@ -1,10 +1,10 @@
-class payloads:
-
+class BasicPayloads:
+  
   global TEXT_SCENES
 
   TEXT_SCENES=['Jacobin sympathisers viewed the Directory as a betrayal of the Revolution, while Bonapartists later justified.','With Royalists apparently on the verge of power, Republicans attempted a pre-emptive coup on 4 September.']
 
-  def create_auth_token_payload(clientid,clientsecret):
+  def create_auth_token_payload(self,clientid,clientsecret):
     payload = {}
     payload['client_id']=clientid
     payload['client_secret']=clientsecret
@@ -13,7 +13,7 @@ class payloads:
     
 
   #This function creates audio object used in storyboard payload
-  def create_audio_object(aivoiceover,auto_background_music ='true',background_music_volume = 0.5):
+  def create_audio_object(self,aivoiceover,auto_background_music ='true',background_music_volume = 0.5):
     audio = {}
     audio['autoBackgroundMusic']= auto_background_music
     audio['backGroundMusicVolume']= background_music_volume
@@ -21,7 +21,7 @@ class payloads:
     return audio
 
   #This function creates aivoiceover object used in audio object
-  def create_aivoiceover_object(speaker='Jackson',speed=100,amplify_level=0):
+  def create_aivoiceover_object(self,speaker='Jackson',speed=100,amplify_level=0):
     aivoiceOver = {}
     aivoiceOver['speaker']= speaker
     aivoiceOver['speed']= speed
@@ -29,7 +29,7 @@ class payloads:
     return aivoiceOver
 
   #This function creates scene object used in scenes array
-  def create_scene_object(text,font_family='Roboto',text_color='#00FF00',fontsize=32,text_background_color='#000000',voice_over=True,split_text_on_new_line=False,split_text_on_period=True):
+  def create_scene_object(self,text,font_family='Roboto',text_color='#00FF00',fontsize=32,text_background_color='#000000',voice_over=True,split_text_on_new_line=False,split_text_on_period=True):
     scene={}
     scene['text']=text
     scene['fontFamily']= font_family
@@ -42,19 +42,19 @@ class payloads:
     return scene
 
   #This function creates scenes object used in storyboard payload
-  def create_scenes(text_list):
+  def create_scenes(self,text_list):
     scenes=[]
     for text in text_list:
-      scene=payloads.create_scene_object(text)
+      scene=self.create_scene_object(text)
       scenes.append(scene)
     return scenes
 
   #This function creates storyboard payload
-  def create_storyboard_payload():
+  def create_storyboard_payload(self):
       payload={}
-      aivoiceover=payloads.create_aivoiceover_object()
-      audio=payloads.create_audio_object(aivoiceover)
-      scenes=payloads.create_scenes(TEXT_SCENES)
+      aivoiceover=self.create_aivoiceover_object()
+      audio=self.create_audio_object(aivoiceover)
+      scenes=self.create_scenes(TEXT_SCENES)
       payload['videoName']='Text_To_Video_English'
       payload['videoDescription']='Text_To_Video_English'
       payload['language']='en'
@@ -63,7 +63,7 @@ class payloads:
       return payload
 
   #This function sets headers 
-  def set_headers(token,userid):
+  def set_headers(self,token,userid):
     headers={}
     headers['Authorization']=token
     headers['X-Pictory-User-Id']=userid
@@ -71,13 +71,13 @@ class payloads:
     return headers  
   
   #This function sets headers for auth request
-  def set_auth_headers():
+  def set_auth_headers(self):
     headers={}
     headers['Content-Type']='application/json'
     return headers  
 
   #This function creates render payload
-  def create_render_payload(audio,output,scenes):
+  def create_render_payload(self,audio,output,scenes):
       payload={}
       payload['audio']=audio
       payload['output']=output
